@@ -15,7 +15,7 @@ def main():
             "continue_game": 0.0,
             "action_space": "multi_discrete",
             "characters": ("Jin", "Heihachi"),
-            "difficulty": 7,
+            "difficulty": 1,
             "outfits": 1
         },
         "wrappers_settings": {
@@ -39,7 +39,7 @@ def main():
     }
 
     base_path = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(base_path, "model", "1.zip")
+    model_path = os.path.join(base_path, "model", "1000000.zip")
 
     # Settings
     params["settings"]["action_space"] = SpaceTypes.DISCRETE if params["settings"]["action_space"] == "discrete" else SpaceTypes.MULTI_DISCRETE
