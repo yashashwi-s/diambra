@@ -1,7 +1,8 @@
 import os
 import json
 from stable_baselines3 import PPO
-from diambra.arena import Arena, EnvironmentSettings, SpaceTypes
+from diambra.arena import EnvironmentSettings, SpaceTypes, make_sb3_env
+from diambra.arena.stable_baselines3.sb3_utils import linear_schedule, AutoSave
 
 class MyAgent:
     def __init__(self):
@@ -14,7 +15,7 @@ class MyAgent:
                 "continue_game": 0.0,
                 "action_space": "multi_discrete",
                 "characters": ("Jin", "Heihachi"),
-                "difficulty": 1,
+                "difficulty": 7,
                 "outfits": 1
             },
             "wrappers_settings": {
@@ -49,7 +50,7 @@ class MyAgent:
                 "n_steps": 2048,
                 "autosave_freq": 1000,
                 "time_steps": 250000,
-                "model_checkpoint": "1000000"
+                "model_checkpoint": "1"
             }
         }
 
@@ -68,3 +69,9 @@ class MyAgent:
 
 def make_agent():
     return MyAgent()
+
+# Ensure matplotlib cache directory is writable
+import matplotlib
+import tempfile
+matplotlib.use('Agg')  # Use a non-interactive backend
+os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
