@@ -8,6 +8,10 @@ from diambra.arena.stable_baselines3.make_sb3_env import make_sb3_env
 def main():
     # Define the configuration settings directly in the script
     params = {
+        "folders": {
+            "parent_dir": "./results/",
+            "model_name": "newer"
+        },
         "settings": {
             "game_id": "tektagt",
             "step_ratio": 6,
@@ -15,7 +19,7 @@ def main():
             "continue_game": 0.0,
             "action_space": "multi_discrete",
             "characters": ("Jin", "Heihachi"),
-            "difficulty": 1,
+            "difficulty": 7,
             "outfits": 1
         },
         "wrappers_settings": {
@@ -39,7 +43,7 @@ def main():
     }
 
     base_path = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(base_path, "model", "1000000.zip")
+    model_path = os.path.join(base_path, "model", "1.zip")
 
     # Settings
     params["settings"]["action_space"] = SpaceTypes.DISCRETE if params["settings"]["action_space"] == "discrete" else SpaceTypes.MULTI_DISCRETE
@@ -65,15 +69,25 @@ def main():
 
     # Evaluate the agent
     print("\nStarting trained agent evaluation ...\n")
-    observation = env.reset()
+    try:
+        observation = env.reset()
+    except Exception as e:
+        print(f"Error during environment reset: {e}")
+        return 1
+
     total_reward = 0
     for _ in range(10000):  # Run for a number of steps
-        action, _state = agent.predict(observation, deterministic=True)
-        observation, reward, done, info = env.step(action)
-        total_reward += reward
-        if done:
-            observation = env.reset()
+        try:
+            action, _state = agent.predict(observation, deterministic=True)
+            observation, reward, done, info = env.step(action)
+            total_reward += reward
+            if done:
+                observation = env.reset()
+                break
+        except Exception as e:
+            print(f"Error during environment step: {e}")
             break
+
     print("\n... trained agent evaluation completed.\n")
     print("Total reward:", total_reward)
 
