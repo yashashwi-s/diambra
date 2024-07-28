@@ -1,8 +1,8 @@
 import os
 import json
 from stable_baselines3 import PPO
-from diambra.arena import EnvironmentSettings, SpaceTypes, make_sb3_env
-from diambra.arena.stable_baselines3.sb3_utils import linear_schedule, AutoSave
+from diambra.arena import EnvironmentSettings, SpaceTypes
+from diambra.arena.stable_baselines3.sb3_utils import linear_schedule, AutoSave, make_sb3_env
 
 class MyAgent:
     def __init__(self):
