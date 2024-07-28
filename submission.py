@@ -15,7 +15,7 @@ class MyAgent:
                 "continue_game": 0.0,
                 "action_space": "multi_discrete",
                 "characters": ("Jin", "Heihachi"),
-                "difficulty": 7,
+                "difficulty": 1,
                 "outfits": 1
             },
             "wrappers_settings": {
@@ -50,7 +50,7 @@ class MyAgent:
                 "n_steps": 2048,
                 "autosave_freq": 1000,
                 "time_steps": 250000,
-                "model_checkpoint": "1"
+                "model_checkpoint": "1000000"
             }
         }
 
