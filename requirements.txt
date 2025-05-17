@@ -1,4 +1,0 @@
-diambra-arena==2.2.7
-stable-baselines3
-torch
-numpy
