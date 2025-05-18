@@ -38,7 +38,7 @@ if __name__ == "__main__":
     # Create environment
     env = diambra.arena.make("tektagt", settings, wrappers_settings)
 
-    model_path = "/sources/model/1000000"
+    model_path = "./1000000"
 
     # Load agent
     agent = PPO.load(model_path, env)
